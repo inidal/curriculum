@@ -1,5 +1,7 @@
 # Changelog of my self-develpment
-The purpose of this repository is to keep track of my certifications over time. As I am learning everyday and going through courses on Coursera, Udemy or other websites, I will update this repository each time.
+The purpose of this repository is to keep track of my certifications as well as my projects. I will update this repository as I am learning everyday and going through courses on Coursera, Udemy or other websites. Personal or professional projects will be added too.
+
+You'll find below the latest certificates with a link of the course and a direct link to the certificate by clicking on each (CERT).
 
 ---
 * edX
