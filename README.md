@@ -1,4 +1,4 @@
-# Changelog of my self-develpment
+# Changelog of my self-development
 The purpose of this repository is to keep track of my certifications as well as my projects. I will update this repository as I am learning everyday and going through courses on Coursera, Udemy or other websites. Personal or professional projects will be added too.
 
 You'll find below the latest certificates with a link of the course and a direct link to the certificate by clicking on each (CERT).
@@ -18,7 +18,7 @@ You'll find below the latest certificates with a link of the course and a direct
             5. [Analyze Data to Answer Questions](https://www.coursera.org/learn/analyze-data?specialization=google-data-analytics) ([**CERT**](https://www.coursera.org/verify/63KA5WFKJUFF))
             6. [Share Data Through the Art of Visualization](https://www.coursera.org/learn/visualize-data?specialization=google-data-analytics) ([**CERT**](https://www.coursera.org/verify/3NWC4P9G446U))
             7. [Data Analysis with R Programming](https://www.coursera.org/learn/data-analysis-r?specialization=google-data-analytics) ([**CERT**](https://www.coursera.org/verify/XYEESX6PAFB3))
-            8. [Google Data Analytics Capstone: Complete a Case Study](https://www.coursera.org/learn/google-data-analytics-capstone?specialization=google-data-analytics) ([**CERT**](https://www.coursera.org/verify/KEKLXN834WZJ))
+            8. [Google Data Analytics Capstone: Complete a Case Study](https://www.coursera.org/learn/google-data-analytics-capstone?specialization=google-data-analytics) ([**CERT**](https://www.coursera.org/verify/KEKLXN834WZJ)) ([**CASE STUDY**](https://inidal.github.io/ggl-data-capstone/))
 ---
 * Udemy
     * Zero To Mastery
