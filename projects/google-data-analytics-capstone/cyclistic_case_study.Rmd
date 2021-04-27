@@ -1,0 +1,395 @@
+---
+title: "Cyclistic Bike - Case Study"
+author: "Nidal Iguer"
+date: "19/04/2021"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: github
+---
+
+### Purpose
+The objective of this analysis is to identify the differences between Cyclistic members and casual riders. The data used covers the previous 12 Months from Apr-2020 to Mar-2021 as asked for in the case study.
+
+### Ask
+1. How do annual members and casual riders use Cyclistic bikes differently?
+2. Why would casual riders buy Cyclistic annual memberships?
+3. How can Cyclistic use digital media to influence casual riders to become members?
+<br><br>
+  
+***
+
+# Prepare and process the data
+```{r setup, eval = FALSE, echo = FALSE, message = FALSE}
+install.packages("tidyverse")
+install.packages("readxl")
+install.packages("lubridate")
+install.packages("hms")
+install.packages("scales")
+install.packages("geosphere")
+install.packages("RiverLoad")
+install.packages("prettydoc")
+install.packages("fontawesome")
+```
+
+## Loading the packages needed
+
+```{r loading,  message = FALSE, warning=FALSE}
+library(tidyverse)
+library(readxl)
+library(lubridate)
+library(hms)
+library(scales)
+library(geosphere)
+library(RiverLoad)
+library(prettydoc)
+library(fontawesome)
+```
+
+## Merging xlsx files
+
+The datasets we're going to use is separated in `r length(list.files("C:/Users/Nidal/Documents/case_study_1/r_project/xlsx_files"))` files representing the last twelve previous months. In order to clean it efficiently we first need to merge them into one single dataframe.
+
+I have started by looping through the list stored in the "table" value and binding each dataset to an empty one I'll name **df_stp0_raw**.
+
+```{r merging, message = FALSE, warning=FALSE}
+setwd("C:/Users/Nidal/Documents/case_study_1/r_project/xlsx_files")
+lst_tables = list.files()
+df_stp0_raw = data.frame()
+
+for(table in lst_tables){
+  dummy_data <- read_excel(table)
+  df_stp0_raw <- rbind(df_stp0_raw, dummy_data)
+}
+
+remove(dummy_data, lst_tables, table) # Cleaning some values created for the task
+```
+
+## Showing the error encountered
+
+Before resuming, I would like to point to the fact that the total of observations were compared and both results were the same. The total of rows/observations were `r nrow(df_stp0_raw)` each.
+
+*NOTE: The chunk of code above has prompted several lines of the same error:*
+
+```{r showing error, echo=FALSE, message=FALSE}
+warning("Warning in read_fun(path = enc2native(normalizePath(path)), sheet_i = sheet, : NA inserted for impossible 1900-02-29 datetime")
+```
+
+## Taking a peek
+
+The time difference of the ride_length calculated in Excel *(as asked for in the case study)* has and could create possible errors in the data.
+
+Getting a small glimpse of the generated data to check that.
+
+```{r glimpse}
+glimpse(df_stp0_raw)
+```
+
+## Calculating the ride_length
+
+Some noticed errors are those in the list that follows:
+
+* the ride_length is recognized as "dttm" which stands for "Date and time" instead of "time" only ;
+* after importing the data created in Excel, the ride_length calculation behave like an absolute value, for example:
+  * *"started_in: 2020-10-02 13:12:09"* and *"ended_at: 2020-10-02 13:08:46"* results with a ride_length of *"23:56:37"* ;
+* fields filled with "NA", even if the started_in and ended_in fields were correct.
+
+To avoid any future error related to this, I'm going to operate the same calculation with R and check the result, this will entirely recalculate the ride_length.
+
+```{r subtracting ride_length}
+df_stp0_raw$ride_length <- as_hms(df_stp0_raw$ended_at - df_stp0_raw$started_at)
+
+glimpse(df_stp0_raw$ride_length) # The result should only show the time difference now
+```
+
+## Filtering the data
+
+The check of code above was originally in a new column and was checked dependently before directly editing the ride_length
+
+Another incomprehensible inconsistency noticed is the bikes returned before being used.
+
+In order to work on a cleaner dataframe, I decided to split the ride_length into two dataframes:
+
+1. **df_stp1_grteqal**: Which is the data frame I will continue to work on.
+2. **df_stp1_lesser**: Which will be stored for further investigations.
+
+```{r filter ride_length}
+df_stp1_grteqal <- subset(df_stp0_raw, ride_length >= 0)
+df_stp1_lesser <- subset(df_stp0_raw, ride_length < 0)
+```
+
+## Getting rid of missing values
+
+To prevent any errors in visualizations, observations that contains **NA** *(which is not available data)* will be removed from **df_stp1_grteqal** and the result will be put in a new dataframe I'll name **df_stp2_prefinal**.
+
+```{r remove NA}
+df_stp2_prefinal <- na.omit(df_stp1_grteqal)
+```
+
+## Calculating the distance travelled
+
+In this step, the distance traveled will be calculated using latitude and longitude start and end points. According to the documentation of **geosphere**, the default result is in **meters**.
+
+The for loop needed very long computations. Thereby, to be able to keep working on the project I ran the following chunk of code on another computer and exported it as a **csv** file.
+
+**Keep in mind:** The column "distance" is in meters.
+
+```{r calculate distance externally, results=FALSE}
+#
+# DONE ON ANOTHER COMPUTER #
+#
+
+# df_stp2_prefinal['distance'] <- NA # Creating an empty column
+
+# for (i in 1:nrow(df_stp2_prefinal)) {
+#   a <- df_stp2_prefinal$start_lng[i]
+#   b <- df_stp2_prefinal$start_lat[i]
+#   c <- df_stp2_prefinal$end_lng[i]
+#   d <- df_stp2_prefinal$end_lat[i]
+
+#   df_stp2_prefinal$distance[i] <- distm(c(a, b),c(c, d), fun = distHaversine)
+# }
+
+# remove(a,b,c,d,i)
+
+# write.csv(df_stp2_prefinal,'C:/Users/Exia/Documents/case_study_1/r_project/df_stp2_prefinal2.csv')
+```
+
+## Importing the result
+
+Importing the csv file and storing it in a new dataframe.
+
+```{r import calculated distance}
+df_stp2_prefinal2_imprt <- read.csv("C:/Users/Nidal/Documents/case_study_1/r_project/external_data/df_stp2_prefinal2.csv")
+
+df_stp2_prefinal2_imprt$X <- NULL # This removes the X column with rows numbers
+```
+
+## Comparing observations and variables
+
+Checking the difference of observations and variables.
+
+```{r compare prefinals}
+tab_diff <- matrix(c(nrow(df_stp2_prefinal), 
+                     ncol(df_stp2_prefinal), 
+                     nrow(df_stp2_prefinal2_imprt), 
+                     ncol(df_stp2_prefinal2_imprt)), 
+                   ncol=2, byrow=TRUE)
+colnames(tab_diff) <- c('Observations','Variables')
+rownames(tab_diff) <- c('df_stp2_prefinal','df_stp2_prefinal2_imprt')
+tab_diff <- as.table(tab_diff)
+
+tab_diff
+remove(tab_diff) # removing the tab created to show the difference
+```
+
+## Converting values type
+
+The file imported had some issues with data type, I was forced to convert them to the correct ones. The data manipulation made is as follows:
+
+1. The values *started_at* and *ended_at* were converted from *char* to *POSIXct*.
+2. I had to redo the *ride_length* subtraction done before.
+
+```{r convert values type}
+# Converting two values from char to POSIXct
+df_stp2_prefinal2_imprt$started_at <- as.POSIXct(df_stp2_prefinal2_imprt$started_at, tz = "UTC")
+df_stp2_prefinal2_imprt$ended_at <- as.POSIXct(df_stp2_prefinal2_imprt$ended_at, tz = "UTC")
+
+# Already done above, but in order to make things like before. I preferred the rerun it.
+df_stp2_prefinal2_imprt$ride_length <- as_hms(df_stp2_prefinal2_imprt$ended_at - df_stp2_prefinal2_imprt$started_at)
+
+# Getting a glimpse on the structure of the dataframe
+str(df_stp2_prefinal2_imprt)
+```
+
+*Note: Values with "dbl" class were automatically converted to "num". No data manipulation is needed since double() is the same as numeric() in R.*
+
+## Last but not least: Missing values
+
+Finally, we clean any not available (NA) fields to start creating visualizations based on the **df_final** dataframe.
+
+```{r remove NA again}
+df_final <- na.omit(df_stp2_prefinal2_imprt)
+```
+
+## Prepare lists for figure 4 (RiverLoad package)
+
+Splitting the **df_final** into two dataframes:
+
+* df_final_members
+* df_final_casuals
+
+```{r separate final df}
+df_final_members <- subset(df_final, member_casual == "member")
+df_final_casuals <- subset(df_final, member_casual == "casual")
+```
+
+To be able to use RiverLoad, the data needed should be extracted and put in separate dataframe.
+
+Since the distance calculated before is in meters, it will need to be converted to kilometers. Simply subtracting the result by 1000 is the quickest method.
+
+```{r preparing for figure 4}
+fig4_members <- data.frame(df_final_members$started_at,
+                       (df_final_members$distance / 1000))
+
+fig4_casuals <- data.frame(df_final_casuals$started_at,
+                       (df_final_casuals$distance / 1000))
+
+# Renaming the column as asked in the documentation
+names(fig4_members) <- c('datetime', 'flow')
+names(fig4_casuals) <- c('datetime', 'flow')
+
+# Using RiverLoad to calculate the mean of every month in the flow of records
+mn_members <- monthly.year.mean(fig4_members)
+mn_casuals <- monthly.year.mean(fig4_casuals)
+
+# Creating member_casual
+mn_members$member_casual <- "member"
+mn_casuals$member_casual <- "casual"
+
+# Binding the dataframes created, and renaming columns
+fig4_dist_month <- rbind(mn_members, mn_casuals)
+names(fig4_dist_month) <- c('month', 'distance_mean', 'member_casual')
+
+# Cleaning
+remove(fig4_casuals, fig4_members, mn_casuals, mn_members)
+```
+
+***
+
+# Analyze the data
+
+The final data frame represents **`r percent(nrow(df_final) / nrow(df_stp0_raw))`** of the raw data. Which results of around **`r percent(1 - nrow(df_final) / nrow(df_stp0_raw))`** of dirty data cleaned and/or isolated.
+
+## Table 1: Mean/Max/Min
+
+As asked for in the case study, the mean, maximum and minimum values of the members and casuals using Cystistic bikes.
+
+|            |                                                             Mean|                                         Maximum|                                        Minimum|
+|:-----------|----------------------------------------------------------------:|-----------------------------------------------:|----------------------------------------------:|
+|Members     |  `r gsub("\\..*","",as_hms(mean(df_final_members$ride_length)))`|   `r as_hms(max(df_final_members$ride_length))`|  `r as_hms(min(df_final_members$ride_length))`|
+|Casuals     |  `r gsub("\\..*","",as_hms(mean(df_final_casuals$ride_length)))`|   `r as_hms(max(df_final_casuals$ride_length))`|  `r as_hms(min(df_final_casuals$ride_length))`|
+
+
+## Table 2: Sum of use per day of week
+
+The sum of use of each type of users by day during the last twelve months.
+
+```{r create functions sum_d/sum_c}
+# For aesthetic purposes and HTML compatibility output, I created two functions to use in the pipe tables below.
+
+sumd_m <- function(day) {
+  res <- sum(df_final_members$day_of_week == day)
+  return(res)
+}
+
+sumd_c <- function(day) {
+  res <- sum(df_final_casuals$day_of_week == day)
+  return(res)
+}
+```
+
+|             |        Members|         Casuals|
+|:------------|--------------:|---------------:|
+|*Sunday*     |  `r sumd_m(1)`|   `r sumd_c(1)`|
+|*Monday*     |  `r sumd_m(2)`|   `r sumd_c(2)`|
+|*Tuesday*    |  `r sumd_m(3)`|   `r sumd_c(3)`|
+|*Wednesday*  |  `r sumd_m(4)`|   `r sumd_c(4)`|
+|*Thursday*   |  `r sumd_m(5)`|   `r sumd_c(5)`|
+|*Friday*     |  `r sumd_m(6)`|   `r sumd_c(6)`|
+|*Saturday*   |  `r sumd_m(7)`|   `r sumd_c(7)`|
+
+
+# Share
+
+## Figure 1: Amount of use of Cyclistic bikes
+
+```{r figure 1, fig.width = 12, fig.height = 6}
+ggplot(df_final, aes(x = day_of_week, fill = member_casual)) +
+  geom_bar() +
+  facet_wrap(~member_casual) +
+  ggtitle("Difference of amount of use for each type of user") +
+  xlab("Days of the week") +
+  ylab("Amount of use") +
+  scale_x_discrete(limits=c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")) +
+  theme(legend.title = element_blank()) +
+  ggtitle("Amount of use of rideables by type of users")
+```
+
+## Figure 2: Length difference (less-details)
+
+```{r figure 2}
+ggplot(data = df_final, aes(x = member_casual,
+                            y = ride_length,
+                            color = member_casual)) +
+  geom_point() +
+  xlab("Membership") +
+  ylab("Ride length") +
+  ggtitle("Ride length difference between casuals and members (less-details)") +
+  theme(legend.title = element_blank())
+```
+
+## Figure 3: Length difference (more-details)
+
+```{r figure 3, warning = FALSE, message = FALSE, fig.width = 15, fig.height = 11}
+ggplot(df_final, aes(started_at, ride_length, color = member_casual, factor(p_year))) +
+  geom_point() +
+  geom_smooth() +
+  facet_wrap(~member_casual, dir = "v", labeller = labeller(member_casual = c("member" = "Members", "casual" = "Casuals"))) +
+  ggtitle("Ride length difference by type of users with more details") +
+  xlab("Months") +
+  ylab("Ride length") +
+  ylim(0, 12000) +
+  theme(legend.title = element_blank())
+```
+
+## Figure 4: Distance travelled
+
+```{r figure 4, fig.width=16, fig.height=9}
+ggplot(fig4_dist_month, aes(x = as_date(month),
+                            y = distance_mean,
+                            color = member_casual)) +
+  geom_line(size=4) +
+  scale_x_date(breaks = "1 month",
+               date_labels = "%m-%Y") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.title = element_blank()) +
+  labs(subtitle="From Apr-2020 to Mar-2021",
+       y="Distance travelled [km]",
+       x="Months",
+       title="Difference of distance travelled by each type of user")
+```
+
+# Act
+  * Survey premium users to know the reason (if any) they've chosen to upgrade to the annual plan.
+  * Survey casuals to know what make them hesitate and what would make them change their mind.
+  * Depending on the survey's result, maybe separate the premium plan into "Premium" and "Premium+". Making the annual plan more affordable will maybe convince more casuals.
+  * Use seasonal promotions to give a glimpse of the annual plan.
+  * Develop and promote an app that help users build consistency.
+
+
+## Comments on the Data
+  * Negative values when subtracting ended_at with started_end.
+  * Distance between lat/long start and end point resulting with a 0, while the ride length is positive.
+  * Station IDs are integers or strings, this can lead to errors or additional work if the data is needed someday.
+  * The figure 3 shows an empty gap for both casuals and members. I got the error message "Removed 18627 rows containing non-finite values (stat_smooth)." I let this to whoever created the data.
+
+# See also
+Additional information about this case study.
+
+## More clarity
+
+As it's written in the title of the chart:
+
+[![Flow chart describing data manipulation process](C:/Users/Nidal/Documents/case_study_1/r_project/imgs/dm_process.png)](https://github.com/inidal/curriculum/blob/main/projects/google-data-analytics-capstone/imgs/dm_process.png){target="_blank"}
+
+## Sources
+  * [Divvy tripdata](https://divvy-tripdata.s3.amazonaws.com/index.html){target="_blank"}
+
+## Get in touch
+If you have any questions, please feel free to contact me.
+
+* [`r fa("fab fa-github", fill = "f09b")` https://github.com/inidal](https://github.com/inidal){target="_blank"}
+* [`r fa("fas fa-link", fill = "f0c1")` https://inidal.dev](https://inidal.dev){target="_blank"}
+* [`r fa("fas fa-envelope", fill = "f0e0")` hello@inidal.dev](mailto:hello@inidal.dev)
+  
