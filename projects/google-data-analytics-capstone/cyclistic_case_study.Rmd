@@ -101,14 +101,13 @@ df_stp0_raw$ride_length <- as_hms(df_stp0_raw$ended_at - df_stp0_raw$started_at)
 
 glimpse(df_stp0_raw$ride_length) # The result should only show the time difference now
 ```
+*NOTE:* The chunck of code above was dependently checked in a new column before directly editing the ride_length.
 
 ## Filtering the data
 
-The check of code above was originally in a new column and was checked dependently before directly editing the ride_length
-
 Another incomprehensible inconsistency noticed is the bikes returned before being used.
 
-In order to work on a cleaner dataframe, I decided to split the ride_length into two dataframes:
+In order to work on a cleaner version, I decided to split the ride_length into two dataframes:
 
 1. **df_stp1_grteqal**: Which is the data frame I will continue to work on.
 2. **df_stp1_lesser**: Which will be stored for further investigations.
@@ -175,19 +174,22 @@ tab_diff <- matrix(c(nrow(df_stp2_prefinal),
                      nrow(df_stp2_prefinal2_imprt), 
                      ncol(df_stp2_prefinal2_imprt)), 
                    ncol=2, byrow=TRUE)
+
 colnames(tab_diff) <- c('Observations','Variables')
 rownames(tab_diff) <- c('df_stp2_prefinal','df_stp2_prefinal2_imprt')
-tab_diff <- as.table(tab_diff)
 
 tab_diff
+
 remove(tab_diff) # removing the tab created to show the difference
 ```
 
 ## Converting values type
 
-The file imported had some issues with data type, I was forced to convert them to the correct ones. The data manipulation made is as follows:
+The file imported had some issues with data type, I was forced to convert them to the correct ones.
 
-1. The values *started_at* and *ended_at* were converted from *char* to *POSIXct*.
+The data manipulation done is as follows:
+
+1. The values *started_at* and *ended_at* were converted from **char** to **POSIXct**.
 2. I had to redo the *ride_length* subtraction done before.
 
 ```{r convert values type}
@@ -195,7 +197,7 @@ The file imported had some issues with data type, I was forced to convert them t
 df_stp2_prefinal2_imprt$started_at <- as.POSIXct(df_stp2_prefinal2_imprt$started_at, tz = "UTC")
 df_stp2_prefinal2_imprt$ended_at <- as.POSIXct(df_stp2_prefinal2_imprt$ended_at, tz = "UTC")
 
-# Already done above, but in order to make things like before. I preferred the rerun it.
+# Already done above, but in order to make things like before. I preferred to rerun it.
 df_stp2_prefinal2_imprt$ride_length <- as_hms(df_stp2_prefinal2_imprt$ended_at - df_stp2_prefinal2_imprt$started_at)
 
 # Getting a glimpse on the structure of the dataframe

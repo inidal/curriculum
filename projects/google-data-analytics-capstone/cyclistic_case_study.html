@@ -229,12 +229,12 @@ a.sourceLine {
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df_stp0_raw<span class="sc">$</span>ride_length) <span class="co"># The result should only show the time difference now</span></span></code></pre></div>
 <pre><code>##  &#39;hms&#39; num [1:3489748] 00:26:49 00:08:09 00:14:23 00:12:12 ...
 ##  - attr(*, &quot;units&quot;)= chr &quot;secs&quot;</code></pre>
+<p><em>NOTE:</em> The chunck of code above was dependently checked in a new column before directly editing the ride_length.</p>
 </div>
 <div id="filtering-the-data" class="section level2">
 <h2>Filtering the data</h2>
-<p>The check of code above was originally in a new column and was checked dependently before directly editing the ride_length</p>
 <p>Another incomprehensible inconsistency noticed is the bikes returned before being used.</p>
-<p>In order to work on a cleaner dataframe, I decided to split the ride_length into two dataframes:</p>
+<p>In order to work on a cleaner version, I decided to split the ride_length into two dataframes:</p>
 <ol style="list-style-type: decimal">
 <li><strong>df_stp1_grteqal</strong>: Which is the data frame I will continue to work on.</li>
 <li><strong>df_stp1_lesser</strong>: Which will be stored for further investigations.</li>
@@ -286,9 +286,9 @@ a.sourceLine {
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">nrow</span>(df_stp2_prefinal2_imprt), </span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">ncol</span>(df_stp2_prefinal2_imprt)), </span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(tab_diff) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Observations&#39;</span>,<span class="st">&#39;Variables&#39;</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tab_diff) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;df_stp2_prefinal&#39;</span>,<span class="st">&#39;df_stp2_prefinal2_imprt&#39;</span>)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>tab_diff <span class="ot">&lt;-</span> <span class="fu">as.table</span>(tab_diff)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(tab_diff) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Observations&#39;</span>,<span class="st">&#39;Variables&#39;</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tab_diff) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;df_stp2_prefinal&#39;</span>,<span class="st">&#39;df_stp2_prefinal2_imprt&#39;</span>)</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>tab_diff</span></code></pre></div>
 <pre><code>##                         Observations Variables
@@ -298,16 +298,17 @@ a.sourceLine {
 </div>
 <div id="converting-values-type" class="section level2">
 <h2>Converting values type</h2>
-<p>The file imported had some issues with data type, I was forced to convert them to the correct ones. The data manipulation made is as follows:</p>
+<p>The file imported had some issues with data type, I was forced to convert them to the correct ones.</p>
+<p>The data manipulation done is as follows:</p>
 <ol style="list-style-type: decimal">
-<li>The values <em>started_at</em> and <em>ended_at</em> were converted from <em>char</em> to <em>POSIXct</em>.</li>
+<li>The values <em>started_at</em> and <em>ended_at</em> were converted from <strong>char</strong> to <strong>POSIXct</strong>.</li>
 <li>I had to redo the <em>ride_length</em> subtraction done before.</li>
 </ol>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting two values from char to POSIXct</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df_stp2_prefinal2_imprt<span class="sc">$</span>started_at <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(df_stp2_prefinal2_imprt<span class="sc">$</span>started_at, <span class="at">tz =</span> <span class="st">&quot;UTC&quot;</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>df_stp2_prefinal2_imprt<span class="sc">$</span>ended_at <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(df_stp2_prefinal2_imprt<span class="sc">$</span>ended_at, <span class="at">tz =</span> <span class="st">&quot;UTC&quot;</span>)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Already done above, but in order to make things like before. I preferred the rerun it.</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Already done above, but in order to make things like before. I preferred to rerun it.</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>df_stp2_prefinal2_imprt<span class="sc">$</span>ride_length <span class="ot">&lt;-</span> <span class="fu">as_hms</span>(df_stp2_prefinal2_imprt<span class="sc">$</span>ended_at <span class="sc">-</span> df_stp2_prefinal2_imprt<span class="sc">$</span>started_at)</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Getting a glimpse on the structure of the dataframe</span></span>
