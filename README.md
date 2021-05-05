@@ -3,10 +3,16 @@ The purpose of this repository is to keep track of my certifications as well as 
 
 You'll find below the latest certificates with a link of the course and a direct link to the certificate by clicking on each (CERT).
 
+
+
 ---
 * edX
     * Harvard University
         * [CS50's Introduction to Computer Science](https://www.edx.org/course/introduction-computer-science-harvardx-cs50x) (In progress)
+---
+* OpenCourseWare
+    * Harvard University
+        * [CS50's Understanding Technology](https://cs50.harvard.edu/technology/2017/) (In progress) [[**PROJECT**](https://scratch.mit.edu/projects/525151971/fullscreen/)]
 ---
 * Coursera
     * Google
