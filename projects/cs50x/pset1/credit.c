@@ -50,12 +50,12 @@ int main(void)
                 checksum += (frst_dgt * 2);
             }
 
-            luhn_logic -= 1;
+            luhn_logic--;
         }
         else
         {
             checksum += frst_dgt;
-            luhn_logic += 1;
+            luhn_logic--;
         }
 
         // Remove first digit and 0 from input
