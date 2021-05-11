@@ -42,20 +42,20 @@ int main(void)
             if (frst_dgt >= 5 && frst_dgt <= 9)
             {
                 mmntry_calc = frst_dgt * 2;
-                checksum = checksum + ((int)((mmntry_calc % 10) + (mmntry_calc / 10)));
+                checksum += ((int)((mmntry_calc % 10) + (mmntry_calc / 10)));
                 mmntry_calc = 0;
             }
             else
             {
-                checksum = checksum + (frst_dgt * 2);
+                checksum += (frst_dgt * 2);
             }
 
-            luhn_logic = luhn_logic - 1;
+            luhn_logic -= 1;
         }
         else
         {
-            checksum = checksum + frst_dgt;
-            luhn_logic = luhn_logic + 1;
+            checksum += frst_dgt;
+            luhn_logic += 1;
         }
 
         // Remove first digit and 0 from input
