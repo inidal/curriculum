@@ -42,26 +42,27 @@ int main(void)
             if (frst_dgt >= 5 && frst_dgt <= 9)
             {
                 mmntry_calc = frst_dgt * 2;
-                checksum = checksum + ((int)((mmntry_calc % 10) + (mmntry_calc / 10)));
+                checksum += ((int)((mmntry_calc % 10) + (mmntry_calc / 10)));
                 mmntry_calc = 0;
             }
             else
             {
-                checksum = checksum + (frst_dgt * 2);
+                checksum += (frst_dgt * 2);
             }
 
-            luhn_logic = luhn_logic - 1;
+            luhn_logic--;
         }
         else
         {
-            checksum = checksum + frst_dgt;
-            luhn_logic = luhn_logic + 1;
+            checksum += frst_dgt;
+            luhn_logic--;
         }
 
         // Remove first digit and 0 from input
         input2 = (input2 - frst_dgt) / 10;
     } while (input2 != 0);
 
+    // Checksum validation
     if (checksum % 10 == 0)
     {
         checksum_valid++;
