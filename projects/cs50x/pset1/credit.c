@@ -62,6 +62,7 @@ int main(void)
         input2 = (input2 - frst_dgt) / 10;
     } while (input2 != 0);
 
+    // Checksum validation
     if (checksum % 10 == 0)
     {
         checksum_valid++;
