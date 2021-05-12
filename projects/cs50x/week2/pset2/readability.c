@@ -5,7 +5,6 @@
 
 int main(void)
 {
-
     // Setting up needed variables
     int i, length;
     float letters = 0;
