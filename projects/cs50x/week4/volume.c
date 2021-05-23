@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 
     while (fread(&data_buffer, sizeof(data_buffer), 1, input))
     {
-        data_buffer = data_buffer * factor;
+        data_buffer *= factor;
         fwrite(&data_buffer, sizeof(data_buffer), 1, output);
     }
 
