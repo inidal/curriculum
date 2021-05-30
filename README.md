@@ -8,11 +8,11 @@ You'll find below the latest certificates with a link of the course and a direct
 ---
 * edX
     * Harvard University
-        * [CS50's Introduction to Computer Science](https://www.edx.org/course/introduction-computer-science-harvardx-cs50x) (In progress) [[**PSET00**](https://scratch.mit.edu/projects/527215523/fullscreen/)]
+        * [CS50's Introduction to Computer Science](https://www.edx.org/course/introduction-computer-science-harvardx-cs50x) (In progress) [[**SCRATCH**](https://scratch.mit.edu/projects/527215523/fullscreen/)]
 ---
 * OpenCourseWare
     * Harvard University
-        * [CS50's Understanding Technology](https://cs50.harvard.edu/technology/2017/) (In progress) [[**PROJECT**](https://scratch.mit.edu/projects/525151971/fullscreen/)]
+        * [CS50's Understanding Technology](https://cs50.harvard.edu/technology/2017/) (In progress) [[**SCRATCH**](https://scratch.mit.edu/projects/525151971/fullscreen/)]
 ---
 * Coursera
     * Google
