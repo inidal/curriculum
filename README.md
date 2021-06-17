@@ -27,10 +27,13 @@ You'll find below the latest certificates with a link of the course and a direct
             8. [Google Data Analytics Capstone: Complete a Case Study](https://www.coursera.org/learn/google-data-analytics-capstone?specialization=google-data-analytics) ([**CERT**](https://www.coursera.org/verify/KEKLXN834WZJ)) [[**CASE STUDY**](https://inidal.github.io/ggl-data-capstone/)]
 ---
 * Udemy
-    * Zero To Mastery
+    * Programming Languages
         * [Complete Python Developer in 2021: Zero to Mastery](https://www.udemy.com/course/complete-python-developer-zero-to-mastery/) ([**CERT**](https://www.udemy.com/certificate/UC-0fbf4d18-3fea-4cbc-9d7e-7d68292f114a/))
-        * [Complete Web & Mobile Designer in 2020: UI/UX, Figma, +more](https://www.udemy.com/course/complete-web-designer-mobile-designer-zero-to-mastery/) ([**CERT**](https://www.udemy.com/certificate/UC-7fbd876f-9f96-4e2b-99b1-3a3337e5283c/))
+        * [C Programming For Beginners - Master the C Language](https://www.udemy.com/course/c-programming-for-beginners-/) (In progress)
+    * Web Development
         * [The Complete Web Developer in 2021: Zero to Mastery](https://www.udemy.com/course/the-complete-web-developer-zero-to-mastery/) ([**CERT**](https://www.udemy.com/certificate/UC-4511711f-042e-455d-97c2-1d7b812e99fa/))
+    * Web Design
+        * [Complete Web & Mobile Designer in 2020: UI/UX, Figma, +more](https://www.udemy.com/course/complete-web-designer-mobile-designer-zero-to-mastery/) ([**CERT**](https://www.udemy.com/certificate/UC-7fbd876f-9f96-4e2b-99b1-3a3337e5283c/))
 ---
 * Freecodecamp
     * [Responsive Web Design Developer Certification](https://www.freecodecamp.org/learn/responsive-web-design/) ([**CERT**](https://www.freecodecamp.org/certification/inidal/responsive-web-design))
