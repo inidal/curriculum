@@ -12,7 +12,8 @@ You'll find below the latest certificates with a link of the course and a direct
 ---
 * OpenCourseWare
     * Harvard University
-        * [CS50's Understanding Technology](https://cs50.harvard.edu/technology/2017/) (In progress) [[**SCRATCH**](https://scratch.mit.edu/projects/525151971/fullscreen/)]
+        * [CS50's Understanding Technology](https://cs50.harvard.edu/technology/2017/) ([**CERT**](https://cs50.harvard.edu/certificates/76d806a2-318c-4569-9257-d592eae67af4)) [[**SCRATCH**](https://scratch.mit.edu/projects/525151971/fullscreen/)]
+        
 ---
 * Coursera
     * Google
