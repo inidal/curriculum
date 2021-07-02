@@ -30,7 +30,7 @@ You'll find below the latest certificates with a link of the course and a direct
 * Udemy
     * Programming Languages
         * [Complete Python Developer in 2021: Zero to Mastery](https://www.udemy.com/course/complete-python-developer-zero-to-mastery/) ([**CERT**](https://www.udemy.com/certificate/UC-0fbf4d18-3fea-4cbc-9d7e-7d68292f114a/))
-        * [C Programming For Beginners - Master the C Language](https://www.udemy.com/course/c-programming-for-beginners-/) (In progress)
+        * [C Programming For Beginners - Master the C Language](https://www.udemy.com/course/c-programming-for-beginners-/) ([**CERT**](https://www.udemy.com/certificate/UC-acb11d70-fc58-4488-b4a8-3b5161b07040/))
     * Web Development
         * [The Complete Web Developer in 2021: Zero to Mastery](https://www.udemy.com/course/the-complete-web-developer-zero-to-mastery/) ([**CERT**](https://www.udemy.com/certificate/UC-4511711f-042e-455d-97c2-1d7b812e99fa/))
     * Web Design
