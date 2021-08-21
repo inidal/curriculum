@@ -8,7 +8,9 @@ You'll find below the latest certificates with a link of the course and a direct
 ---
 * edX
     * Harvard University
-        * [CS50's Introduction to Computer Science](https://www.edx.org/course/introduction-computer-science-harvardx-cs50x) (Cert) [[**SCRATCH**](https://scratch.mit.edu/projects/527215523/fullscreen/)] [[**FINAL PROJECT: CORSPAT**](https://corspat.inidal.dev)]
+        * [CS50's Introduction to Computer Science](https://www.edx.org/course/introduction-computer-science-harvardx-cs50x) (CERT) [[**SCRATCH**](https://scratch.mit.edu/projects/527215523/fullscreen/)] [[**FINAL PROJECT: CORSPAT**](https://corspat.inidal.dev)]
+    * The Linux Foundation
+        * [LFS101x: Introduction to Linux](https://www.edx.org/course/introduction-to-linux) (IN PROGRESS)
 ---
 * OpenCourseWare
     * Harvard University
