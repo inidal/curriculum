@@ -1,14 +1,16 @@
 # Changelog of my self-development
-The purpose of this repository is to keep track of my certifications as well as my projects. I will update this repository as I am learning everyday and going through courses on Coursera, Udemy or other websites. Personal or professional projects will be added too.
+The purpose of this repository is to keep track of my certifications as well as my projects. I will update this repository as I am learning every day and going through courses on edX, Coursera, Udemy, or other massive open online course providers. Personal and/or professional projects will be added too.
 
-You'll find below the latest certificates with a link of the course and a direct link to the certificate by clicking on each (CERT).
+You'll find below the latest certificates with a link to the course and a direct link to the certificate by clicking on each (CERT).
 
 
 
 ---
 * edX
     * Harvard University
-        * [CS50's Introduction to Computer Science](https://www.edx.org/course/introduction-computer-science-harvardx-cs50x) (Cert) [[**SCRATCH**](https://scratch.mit.edu/projects/527215523/fullscreen/)] [[**FINAL PROJECT: CORSPAT**](https://corspat.inidal.dev)]
+        * [CS50's Introduction to Computer Science](https://www.edx.org/course/introduction-computer-science-harvardx-cs50x) ([**CERT**](https://courses.edx.org/certificates/a5d45ebe135d45b3b9a68ea093add7cd)) [[**SCRATCH**](https://scratch.mit.edu/projects/527215523/fullscreen/)] [[**FINAL PROJECT: CORSPAT**](https://corspat.inidal.dev)]
+    * The Linux Foundation
+        * [LFS101x: Introduction to Linux](https://www.edx.org/course/introduction-to-linux) (IN PROGRESS)
 ---
 * OpenCourseWare
     * Harvard University
