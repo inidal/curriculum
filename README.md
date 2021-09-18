@@ -28,6 +28,9 @@ You'll find below the latest certificates with a link to the course and a direct
             6. [Share Data Through the Art of Visualization](https://www.coursera.org/learn/visualize-data?specialization=google-data-analytics) ([**CERT**](https://www.coursera.org/verify/3NWC4P9G446U))
             7. [Data Analysis with R Programming](https://www.coursera.org/learn/data-analysis-r?specialization=google-data-analytics) ([**CERT**](https://www.coursera.org/verify/XYEESX6PAFB3))
             8. [Google Data Analytics Capstone: Complete a Case Study](https://www.coursera.org/learn/google-data-analytics-capstone?specialization=google-data-analytics) ([**CERT**](https://www.coursera.org/verify/KEKLXN834WZJ)) [[**CASE STUDY**](https://inidal.github.io/ggl-data-capstone/)]
+    * Stanford University
+        * [Machine Learning](https://www.coursera.org/learn/machine-learning) ([In progress](#))
+
 ---
 * Udemy
     * Programming Languages
