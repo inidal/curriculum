@@ -29,7 +29,7 @@ You'll find below the latest certificates with a link to the course and a direct
             7. [Data Analysis with R Programming](https://www.coursera.org/learn/data-analysis-r?specialization=google-data-analytics) ([**CERT**](https://www.coursera.org/verify/XYEESX6PAFB3))
             8. [Google Data Analytics Capstone: Complete a Case Study](https://www.coursera.org/learn/google-data-analytics-capstone?specialization=google-data-analytics) ([**CERT**](https://www.coursera.org/verify/KEKLXN834WZJ)) [[**CASE STUDY**](https://inidal.github.io/ggl-data-capstone/)]
     * Stanford University
-        * [Machine Learning](https://www.coursera.org/learn/machine-learning) ([In progress](#))
+        * [Machine Learning](https://www.coursera.org/learn/machine-learning) ([**CERT**](https://coursera.org/share/82f282aaef604d01fa14f8c73a929b78))
         * [Introduction to Mathematical Thinking](https://www.coursera.org/learn/mathematical-thinking) ([In progress](#))
 
 ---
