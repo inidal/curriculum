@@ -35,7 +35,7 @@ You'll find below the latest certificates with a link to the course and a direct
 ---
 * Udemy
     * Machine Learning
-        * [Complete Machine Learning & Data Science Bootcamp 2021](https://www.udemy.com/course/complete-machine-learning-and-data-science-zero-to-mastery/) ([In progress](#))
+        * [Complete Machine Learning & Data Science Bootcamp 2022](https://www.udemy.com/course/complete-machine-learning-and-data-science-zero-to-mastery/) ([**CERT**](https://www.udemy.com/certificate/UC-cf83a86a-fbbb-451d-9caf-ee3e50a86d37/))
         * [Machine Learning A-Z™: Hands-On Python & R In Data Science](https://www.udemy.com/course/machinelearning/) ([In progress](#))
     * Programming Languages
         * [Complete Python Developer in 2021: Zero to Mastery](https://www.udemy.com/course/complete-python-developer-zero-to-mastery/) ([**CERT**](https://www.udemy.com/certificate/UC-0fbf4d18-3fea-4cbc-9d7e-7d68292f114a/))
